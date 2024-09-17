@@ -36,8 +36,10 @@ ecommerce-automation-framework
 │   │   ├── java
 │   │   │   ├── tests                    # Test classes for various scenarios
 │   │   ├── Test components              # Base test, listeners
+├── reports                              # Index.html, Screenshot 
 ├── test-output                          # Stores Extent Reports and other test results
 ├── pom.xml                              # Maven configuration file with dependencies
+├── testng.xml                           # testNG XML configuration file with testsuite details
 ├── README.md                            # Project documentation
 
 ```
