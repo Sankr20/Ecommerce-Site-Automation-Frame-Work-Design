@@ -7,13 +7,13 @@
 </listeners>
   <test thread-count="5" name="Order submission Test">
     <classes>
-    <class name="automationproject.testcases.E2ETest1"/>
+    <class name="automationproject.testcases.E2ETest1.java"/>
     </classes>
   </test> <!-- Test -->
   
   <test thread-count="5" name="Error Validation Test">
     <classes>
-      <class name="automationproject.testcases.ErrorValidations"/>
+      <class name="automationproject.testcases.ErrorValidations.java"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
