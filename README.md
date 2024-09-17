@@ -83,7 +83,7 @@ You can execute tests by directly running the `testng.xml` file, which categoriz
 To run tests in parallel:
 1. Set `parallel` to `tests` or `methods` in `testng.xml`:
    ```xml
-   <suite name="Automation Suite" parallel="tests" thread-count="2">
+   <suite name="Automation Suite" parallel="tests" thread-count="5">
    ```
 2. Run the following Maven command:
    ```bash
@@ -91,9 +91,9 @@ To run tests in parallel:
    ```
 
 ## **Test Reports**
-After executing tests, you can find the **Extent HTML Reports** in the `test-output/` folder. Open the `index.html` file to view the detailed report:
+After executing tests, you can find the **Extent HTML Reports** in the `reports/` folder. Open the `index.html` file to view the detailed report:
 ```bash
-test-output/ExtentReports/index.html
+reports/ExtentReports/index.html
 ```
 
 ## **Jenkins Integration**
