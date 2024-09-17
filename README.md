@@ -55,7 +55,7 @@ ecommerce-automation-framework
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Sankr20/Ecommerce-Site-Automation-Framework.git
-   cd Ecommerce-Site-Automation-Framework
+   cd Ecommerce-Site-Automation-Frame-Work-Design
    ```
 2. **Install dependencies**:
    Run the following command to install all required dependencies:
@@ -76,7 +76,7 @@ mvn clean test
 ### **Using TestNG.xml**
 You can execute tests by directly running the `testng.xml` file, which categorizes and groups the test cases for better execution management:
 ```bash
-<project-root>/src/test/resources/testng.xml
+<project-root>/src/testSuites/testng.xml
 ```
 
 ### **Parallel Execution**
@@ -93,7 +93,7 @@ To run tests in parallel:
 ## **Test Reports**
 After executing tests, you can find the **Extent HTML Reports** in the `reports/` folder. Open the `index.html` file to view the detailed report:
 ```bash
-reports/ExtentReports/index.html
+reports/index.html
 ```
 
 ## **Jenkins Integration**
