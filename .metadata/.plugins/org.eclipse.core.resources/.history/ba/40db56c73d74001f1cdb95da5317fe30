@@ -1,0 +1,43 @@
+package automationproject.testcases;
+
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import automationproject.TestComponents.BaseTest;
+import automationproject.pages.AddingProductToCart;
+import automationproject.pages.Checkout;
+import automationproject.pages.OrderVerification;
+import automationproject.pages.UserRegistration;
+
+public class E2ETest1 extends BaseTest{
+
+	WebDriver driver;
+	String firstname="venka";
+	String lastname="tesh";
+	String email="whenkey@gmail.com";
+	String mobile="1213456780";
+	String occupation="Engineer";
+	String password = "Qaz@1020";
+	String confirmpassword= "Qaz@1020";
+	String productName= "ZARA COAT 3";
+	
+
+	@Test
+	public void purchasing() throws InterruptedException
+	{
+		
+		//userRegistration.registration(firstname, lastname, email, mobile, occupation, password, confirmpassword);
+		AddingProductToCart addingProductToCart=userRegistration.login(email, password);
+		addingProductToCart.addToCart(productName);
+		Thread.sleep(2000);
+		OrderVerification orderVerification=addingProductToCart.gotoCart();
+		Checkout checkout = orderVerification.verifyOrder(productName);
+		checkout.orderComplettion();
+		String successMessageElement= checkout.confirmationMessage();
+		Assert.assertEquals(successMessageElement,"THANKYOU FOR THE ORDER.");
+
+	}
+
+}

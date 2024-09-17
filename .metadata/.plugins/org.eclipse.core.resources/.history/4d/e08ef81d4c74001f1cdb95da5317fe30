@@ -1,0 +1,77 @@
+package automationproject.testcases;
+
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import automationproject.TestComponents.BaseTest;
+import automationproject.pages.AddingProductToCart;
+import automationproject.pages.Checkout;
+import automationproject.pages.OrderVerification;
+import automationproject.pages.VerifyPlacedOrder;
+
+public class E2ETest1 extends BaseTest{
+
+	WebDriver driver;
+	
+	
+
+	@Test(dataProdvider="getData")
+	public void purchasingProduct() throws InterruptedException, IOException
+	{
+		//userRegistration.registration(firstname, lastname, email, mobile, occupation, password, confirmpassword);
+		AddingProductToCart addingProductToCart=userRegistration.login(email, password);
+		addingProductToCart.addToCart(productName);
+		Thread.sleep(2000);
+		OrderVerification orderVerification=addingProductToCart.gotoCart();
+		Checkout checkout = orderVerification.verifyOrder(productName);
+		checkout.orderComplettion();
+		String successMessageElement= checkout.confirmationMessage();
+		Assert.assertEquals(successMessageElement,"THANKYOU FOR THE ORDER.");
+		
+	}
+	
+	@Test(dependsOnMethods="purchasingProduct")
+	public void orderHistory()
+	{
+		AddingProductToCart addingProductToCart=userRegistration.login(email, password);
+		VerifyPlacedOrder verifyPlacedOrder=	addingProductToCart.gotoOrderHistory();
+		 Boolean orderFound = verifyPlacedOrder.verifyThePlacedOrder(productName) != null;
+		    Assert.assertTrue(orderFound, "Order not found in the order history.");
+		
+	}
+	
+	
+	@DataProvider
+	public Object[][] getData()
+	{
+		HashMap<Object, Object> map = new HashMap();
+		map.put("firstname", "venka");
+		map.put("lastname", "tesh");
+		map.put("email","whenkey@gmail.com");
+		map.put("mobile", "1213456780");
+		map.put("occupation", "Engineer");
+		map.put("password", "Qaz@1020");
+		map.put("confirmpassword", "Qaz@1020");
+		map.put("ZARA COAT 3", "ZARA COAT 3");
+		
+		HashMap<Object, Object> map1 = new HashMap<>();
+	    map2.put("firstname", "john");
+	    map2.put("lastname", "doe");
+	    map2.put("email", "john.doe@example.com");
+	    map2.put("mobile", "0987654321");
+	    map2.put("occupation", "Doctor");
+	    map2.put("password", "Pwd@1234");
+	    map2.put("confirmpassword", "Pwd@1234");
+	    map2.put("product", "ADIDAS SHOES");
+		
+		
+		 return new Object[][] { { map }, { map1 } };
+	}
+
+}

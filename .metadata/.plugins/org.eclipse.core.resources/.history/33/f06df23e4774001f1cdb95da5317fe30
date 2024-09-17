@@ -1,0 +1,45 @@
+package automationproject.pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import automationproject.AbstractComponents.AbstractComponent;
+
+public class VerifyPlacedOrder extends AbstractComponent{
+	WebDriver driver;
+	
+	public VerifyPlacedOrder(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	@FindBy(css="tr td:nth-child(3)")
+	WebElement totalOrder;
+	
+	@FindBy(xpath="//i[@class='fa fa-handshake-o']")
+	WebElement placedOrder;
+	
+	public void verifyThePlacedOrder(String productName)
+	{
+		placedOrder.click();
+		Boolean OrderMatch= totalOrder.stream().anyMatch(cartProduct -> cartProduct.getText().equalsIgnoreCase(productName));
+		System.out.println(OrderMatch);
+		
+		if(OrderMatch) {
+			System.out.println("Order found in cart: " + productName);
+		}
+		else {
+			System.out.println("Order not found in cart: " + productName);
+		}
+	}
+
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,48 @@
+package automationproject.pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class OrderVerification {
+
+	WebDriver driver;
+	WebDriverWait w;
+	
+	public OrderVerification(WebDriver driver)
+	{
+		this.driver=driver;
+		PageFactory.initElements(driver, this);
+	}
+	
+	@FindBy(css=".cart h3")
+	WebElement productNames;
+	
+	By checkoutBy=By.cssSelector(".totalRow .btn");
+	
+	@FindBy(css=".totalRow .btn")
+	WebElement checkoutButton;
+	
+	
+	public void verifyOrder(String productName)
+	{
+		List<WebElement> cartProducts=productNames;
+		Boolean productMatch= cartProducts.stream().anyMatch(cartProduct -> cartProduct.getText().equalsIgnoreCase(productName));
+		System.out.println(productMatch);
+		w.until(ExpectedConditions.visibilityOfElementLocated(checkoutBy));
+		checkoutButton.click();
+	}
+	
+	
+	
+	driver.findElement(By.cssSelector(".totalRow .btn")).click();
+	
+	
+	
+}

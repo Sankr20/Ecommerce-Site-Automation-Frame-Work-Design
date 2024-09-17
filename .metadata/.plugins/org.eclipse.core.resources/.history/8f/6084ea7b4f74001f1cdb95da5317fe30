@@ -1,0 +1,53 @@
+package automationproject.testcases;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import automationproject.TestComponents.BaseTest;
+
+
+public class ErrorValidations extends BaseTest {
+
+	
+	@Test(dataProvider="getData")
+	public void loginErrorValidation(HashMap<String,String> input) throws InterruptedException, IOException
+	{
+		userRegistration.login(input.get(email), input.get(password));
+		Assert.assertEquals("Incorrect email or password.", userRegistration.errorMessage());
+		
+		
+	}
+	
+	@DataProvider
+	public Object[][] getData()
+	{
+		HashMap<String, String> map = new HashMap<>();
+		map.put("firstname", "saravana");
+		map.put("lastname", "kumar");
+		map.put("email","saravanakumar@gmail.com");
+		map.put("mobile", "1213456780");
+		map.put("occupation", "Engineer");
+		map.put("password", "Qaz@1020");
+		map.put("confirmpassword", "Qaz@1020");
+		map.put("product", "ZARA COAT 3");
+
+		HashMap<String, String> map1 = new HashMap<>();
+		map1.put("firstname", "john");
+		map1.put("lastname", "doe");
+		map1.put("email", "john.doe@example.com");
+		map1.put("mobile", "9876543210");
+		map1.put("occupation", "Doctor");
+		map1.put("password", "Pwd@1234");
+		map1.put("confirmpassword", "Pwd@1234");
+		map1.put("product", "ADIDAS ORIGINAL");
+
+
+		return new Object[][] { { map }, { map1 } };
+	}
+
+
+}

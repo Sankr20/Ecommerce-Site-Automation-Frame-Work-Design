@@ -1,0 +1,38 @@
+package automationproject.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+
+public class UserRegistration {
+	
+	WebDriver driver;
+	
+	public UserRegistration()
+	{
+		this.driver =  driver;
+		PageFactory.initElements(driver, this);
+		
+	}
+	
+	driver.findElement(By.cssSelector(".text-reset")).click();
+	driver.findElement(By.id("firstName")).sendKeys(firstname);
+	driver.findElement(By.id("lastName")).sendKeys(lastname);
+	driver.findElement(By.id("userEmail")).sendKeys(email);
+	driver.findElement(By.id("userMobile")).sendKeys("1234567890");
+	Select dropdown = new Select(driver.findElement(By.className("custom-select")));
+	dropdown.selectByVisibleText("Engineer");
+	driver.findElement(By.cssSelector("input[value='Male']")).click();
+	driver.findElement(By.id("userPassword")).sendKeys(password);
+	driver.findElement(By.id("confirmPassword")).sendKeys(password);
+	driver.findElement(By.cssSelector("input[formcontrolname='required']")).click();
+	driver.findElement(By.id("login")).click();
+	w.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Login']")));
+	driver.findElement(By.xpath("//button[text()='Login']")).click();
+	
+	
+	
+	
+}

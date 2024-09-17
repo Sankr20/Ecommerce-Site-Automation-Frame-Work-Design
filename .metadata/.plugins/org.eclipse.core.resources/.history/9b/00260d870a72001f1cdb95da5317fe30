@@ -1,0 +1,70 @@
+package automationproject.pages;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class AddingProductToCart {
+
+	WebDriver driver;
+	WebDriverWait w;
+	
+	public AddingProductToCart(WebDriver driver)
+	{
+		this.driver= driver;
+		PageFactory.initElements(driver, this);
+		w = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
+	
+	By productsBy = By.cssSelector(".mb-3");
+	
+	@FindBy(css=".mb-3")
+	WebElement productSection;
+	
+	By addtoCartBy = By.cssSelector(".card-body button:last-of-type");
+	
+	By productNameBy = By.cssSelector("b");
+	
+	By toastBy = By.cssSelector("#toast-container");
+	
+	By animationBy = By.cssSelector(".ng-animating");
+	
+	@FindBy(css="[routerlink*='cart']")
+	WebElement cartButton;
+	
+	public void addToCart()
+	{
+		w.until(ExpectedConditions.visibilityOfElementLocated(productsBy));
+		List<WebElement> products= driver.findElements(productsBy);
+		WebElement prod=products.stream().filter(product ->product.findElement(productNameBy).getText().equalsIgnoreCase("zara coat 3"))
+				.findFirst().orElse(null);
+		prod.findElement(addtoCartBy).click();
+		w.until(ExpectedConditions.visibilityOfElementLocated(toastBy));
+		w.until(ExpectedConditions.invisibilityOfElementLocated(animationBY));
+		cartButton.click();
+	}
+	
+	
+	
+		
+	
+	
+	driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

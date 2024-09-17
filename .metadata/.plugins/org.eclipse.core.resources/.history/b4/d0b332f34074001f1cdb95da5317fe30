@@ -1,0 +1,26 @@
+package automationproject.testcases;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import automationproject.TestComponents.BaseTest;
+import automationproject.pages.AddingProductToCart;
+import automationproject.pages.Checkout;
+import automationproject.pages.OrderVerification;
+
+public class ErrorValidations extends BaseTest {
+
+	String email="whenkey@gmail.com";
+	String password="Qaz@1020";
+	
+	@Test
+	public void verifyError() throws InterruptedException, IOException
+	{
+		AddingProductToCart addingProductToCart=userRegistration.login(email, password);
+		
+		
+	}
+
+}
