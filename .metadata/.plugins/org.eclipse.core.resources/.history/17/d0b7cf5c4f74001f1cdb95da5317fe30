@@ -1,0 +1,23 @@
+package automationproject.testcases;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import automationproject.TestComponents.BaseTest;
+
+
+public class ErrorValidations extends BaseTest {
+
+	
+	@Test
+	public void loginErrorValidation() throws InterruptedException, IOException
+	{
+		userRegistration.login(email, password);
+		Assert.assertEquals("Incorrect email or password.", userRegistration.errorMessage());
+		
+		
+	}
+
+}

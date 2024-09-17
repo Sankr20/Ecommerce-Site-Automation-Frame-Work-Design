@@ -1,0 +1,30 @@
+package automationproject.testcases;
+
+import java.io.IOException;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import automationproject.pages.AddingProductToCart;
+import automationproject.pages.Checkout;
+import automationproject.pages.OrderVerification;
+
+public class ErrorValidations extends BaseTest {
+
+	
+	@Test
+	public void verifyError() throws InterruptedException, IOException
+	{
+		//userRegistration.registration(firstname, lastname, email, mobile, occupation, password, confirmpassword);
+		AddingProductToCart addingProductToCart=userRegistration.login(email, password);
+		addingProductToCart.addToCart(productName);
+		Thread.sleep(2000);
+		OrderVerification orderVerification=addingProductToCart.gotoCart();
+		Checkout checkout = orderVerification.verifyOrder(productName);
+		checkout.orderComplettion();
+		String successMessageElement= checkout.confirmationMessage();
+		Assert.assertEquals(successMessageElement,"THANKYOU FOR THE ORDER.");
+		
+	}
+
+}

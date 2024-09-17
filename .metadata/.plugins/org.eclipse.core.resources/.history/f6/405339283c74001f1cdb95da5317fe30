@@ -1,0 +1,62 @@
+package automationproject.TestComponents;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class BaseTest {
+
+	
+	
+	
+	@BeforeMethod
+	public void setup() throws IOException
+	{
+		Properties prop= new Properties();
+		FileInputStream fis= new FileInputStream("C:\\Users\\legen\\eclipse-workspace-1\\End to End framework Design\\ecommerce-website\\src\\main\\java\\automationproject\\Resources\\GlobalData.properties");
+		prop.load(fis);
+		String browserName= prop.getProperty("browser");
+		
+		if(browserName.equalsIgnoreCase("chrome"))
+		{
+			WebDriverManager.chromedriver().setup();
+			WebDriver driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			driver.manage().window().maximize();
+		}
+		else if(browserName.equalsIgnoreCase("firefox"))
+		{
+			WebDriverManager.firefoxdriver().setup();
+			WebDriver driver = new FirefoxDriver();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			driver.manage().window().maximize();
+		}else if(browserName.equalsIgnoreCase("edge"))
+		{
+			WebDriverManager.firefoxdriver().setup();
+			WebDriver driver = new EdgeDriver();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			driver.manage().window().maximize();
+		}else(browserName.equalsIgnoreCase("safari"))
+		{
+			WebDriverManager.firefoxdriver().setup();
+			WebDriver driver = new SafariDriver();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			driver.manage().window().maximize();
+		}
+		
+		
+		
+		
+	}
+}
