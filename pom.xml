@@ -44,6 +44,20 @@
             <version>7.7.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.34</version>
+    <scope>provided</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+<dependency>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>3.5.0</version>
+</dependency>
+
 
         <!-- Jackson Databind -->
         <dependency>
@@ -52,14 +66,39 @@
             <version>2.13.3</version>
         </dependency>
     </dependencies>
-
-    <build>
+    
+    <profiles>
+    
+    <profile>
+    
+   
+    <id>Regression</id>
+     <build>
         <plugins>
             <!-- Maven Surefire Plugin for running TestNG tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M6</version>
+                <version>3.5.0</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testSuites/testng.xml</suiteXmlFile> <!-- Ensure this path exists -->
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+     </build>
+     </profile>
+    </profiles>
+
+    <build>
+    <pluginManagement>
+        <plugins>
+            <!-- Maven Surefire Plugin for running TestNG tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.0</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>testSuites/testng.xml</suiteXmlFile> <!-- Ensure this path exists -->
@@ -106,5 +145,6 @@
                 <version>3.7.1</version>
             </plugin>
         </plugins>
+        </pluginManagement>
     </build>
 </project>
